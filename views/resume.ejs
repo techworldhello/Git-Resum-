@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Document</title>
+  <link href="https://fonts.googleapis.com/css?family=Titillium+Web" rel="stylesheet">
+  <link rel="stylesheet" href="/resume_style.css">
+</head>
+<body>
+  <div class="loading-div">
+    <img class="loading" src="/media/loading.gif" alt="loader">
+  </div>
+
+  <div class="container hide">
+    <header class="user-info">
+      <img src="" alt="" class="avatar">
+      <p class="name"></p>
+      <ul class="email-dropdown">
+        <button class="contact-info" onclick="toggleContact('contact');">Hire me</button>
+        <li style="visibility: hidden;" class="contact"></li>
+      </ul>
+      <img class="logo" src="/media/logo.png" alt="">
+    </header>
+  
+    <h1 class=description></h1>
+  
+    <section class="main">
+      <div>
+        <h3 class="all-lngs">My Languages</h3>
+        <ul class="tech-stack">
+        </ul>
+      </div>
+    
+      <div class="projects">
+        <h3 class="projects-title">My projects</h3>    
+      </div>
+    </section>
+  </div>
+  <script>
+    const profileData = <%- JSON.stringify(json) %>
+  </script>
+  <script src="/resume.js"></script>
+</body>
+</html>

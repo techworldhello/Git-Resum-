@@ -1,6 +1,7 @@
 * {
   box-sizing: border-box;
   font-family: 'Titillium Web', sans-serif;
+  color: #666666;
 }
 
 body {
@@ -15,23 +16,28 @@ body {
   margin-top: 8em;
 }
 
-#signin-btn {
+.app-title, .recent-cv, input[value="Connect with Github"]  {
+  color: #63b6cf;
+}
+
+.signin-btn {
   height: 3em;
   width: 13em;
   border-radius: .5em;
   font-size: 16pt;
   margin: 1em;
   line-height: 50px;
+  border: 1.5px solid #63b6cf;
 }
 
-#signin-btn:hover {
-  background-color: skyblue;
+.signin-btn:hover {
+  background-color: #63b6cf;
   color: white;
   border: none;
   cursor: pointer;
 }
 
-#button-logo {
+.button-logo {
   height: 1.2em;
   margin: .5em .5em 0 0;
 }

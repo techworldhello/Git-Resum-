@@ -1,9 +1,9 @@
 const express = require('express');
 const app = express();
 const fetch = require('node-fetch');
+const axios = require('axios');
 const cors = require('cors');
 const PORT = process.env.port || 3000;
-const monk = require('monk');
 const CLIENT_ID = process.env.CLIENT_ID;
 const CLIENT_SECRET = process.env.CLIENT_SECRET;
 
@@ -24,10 +24,10 @@ const parseUserData = data => {
         created_at: repo.created_at,
         updated_at: repo.updated_at,
         description: repo.description ? repo.description : '',
-        langs: repo.languages,
+        language: repo.language,
         link: repo.html_url,
-        star_count: repo.stargazers_count // order by star count
-      }
+        star_count: repo.stargazers_count
+      } // order by star count
     }).sort((a, b) => parseInt(b.star_count) - parseInt(a.star_count)),
   };
 }
@@ -55,20 +55,61 @@ const getUserData = (user) => {
       return parseUserData(values)
       //return values
     })
+    // .then(json => json.map(repo => repo.name))
+    // .then(repoNames => repoNames.map(repoName => {
+    //   fetch(`https://api.github.com/repos/${user}/${repoName}/contents/README.md`)
+    // }))
     .catch(error => { 
       console.log(error.message)
     })
 }
 
+app.use(express.static('public'));
 app.use(cors());
 app.use(express.json());
-
-// const db = monk('localhost/users');
-// const user = db.get('user');
 
 app.get('/', (req, res) => {
   res.render('index');
 })
+
+app.get('/user/signin/callback', (req, res, next) => {
+  const { code } = req.query;
+
+  if (!code) {
+    return res.send({
+      success: false,
+      message: 'Error, no code'
+    });
+  }
+  
+  const data = { 
+    client_id: CLIENT_ID, 
+    client_secret: CLIENT_SECRET, 
+    code: code
+  }
+
+  axios
+    .post('https://github.com/login/oauth/access_token', data)
+    .then(response => {
+      fetch(`https://api.github.com/user?${response.data}`)
+        .then(userData => userData.json())
+        .then(json => {
+          // const accessToken = queryStringToObj(response.data).access_token
+          fetch(`http://localhost:3000/api/${json.login}`)
+            .then(data => data.json())
+            .then(json => res.render('resume', {json}))
+        })
+    })
+    .catch(error => {
+      console.log('err', error)
+    })
+})
+
+app.get('/:login', (req, res) => { 
+  res.render('resume')
+  res.send(req.params.login + req.query.user_token)
+})
+
 
 app.get('/api/:user', (req, res) => {
   const queryParam = req.params.user;

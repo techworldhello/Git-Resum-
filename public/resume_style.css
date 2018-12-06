@@ -1,0 +1,126 @@
+* {
+  box-sizing: border-box;
+  font-family: 'Titillium Web', sans-serif;
+  color: #666666;
+}
+
+.container {
+  width: 70%;
+  margin: auto;
+}
+
+.loading-div {
+  position: absolute;
+  left: 50%;
+  top: 45%;
+  -webkit-transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%);
+}
+
+.loading {
+  width: 20em;
+}
+
+.user-info {
+  padding: 1em;
+  display: flex;
+	justify-content: flex-start;
+	align-items: center;
+  /* display: flex;
+  justify-content: space-around; */
+}
+
+.avatar {
+  width: 5rem;
+	height: 5rem;
+	border-radius: 10%;
+	margin-right: 1rem;
+}
+
+.name {
+  font-size: 16pt;
+  font-weight: bold;
+  color: #63b6cf;
+}
+
+.all-lngs {
+  font-size: 14pt;
+  font-weight: bold;
+  cursor: pointer;
+  color: #63b6cf;
+}
+
+.project-description {
+  visibility: hidden;  
+}
+
+.email-dropdown {
+  margin-left: auto;
+  list-style-type: none;
+}
+
+.contact-info {
+  height: 2em;
+  width: 5em;
+  font-size: 16pt;
+  border-radius: .5em;
+  font-size: 16pt;
+  color: #63b6cf;
+  border: 1.5px solid #63b6cf;
+}
+
+.contact-info:hover {
+  background-color: #63b6cf;
+  color: white;
+  border: none;
+  cursor: pointer;
+}
+
+.logo {
+  width: 2em;
+}
+
+.hello-span {
+  color: #63b6cf;
+  font-weight: bold;
+}
+
+.tile {
+  border: 1.5px solid #63b6cf;
+  border-radius: .5em;
+  padding: 1em;
+  display: inline-block;
+  vertical-align: top;
+  border-radius: .5em;
+  cursor: pointer;
+}
+
+.description {
+  text-align: center;
+}
+
+.main {
+  display: flex;
+  justify-content: space-evenly;
+}
+
+.tech-stack {
+  width: 20%;
+}
+
+.projects-title {
+  color: #63b6cf;
+}
+
+.projects {
+  display: grid;
+  margin-top: 1.5em;
+  width: 60%;
+  grid-template-columns: repeat(3, 1fr);
+  grid-gap: 1rem;
+  grid-auto-rows: 1fr;
+}
+
+.hide {
+  display: none;
+}
