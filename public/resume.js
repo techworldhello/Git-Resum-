@@ -10,6 +10,8 @@ const input = document.querySelector('.url');
 const languageList = document.querySelector('.lang-list');
 const allLngsHeading = document.querySelector('.all-lngs');
 const loadingElem = document.querySelector('.loading');
+const colorInput = document.querySelector('input[type=color]');
+const colorVariable = '--color';
 
 const pageLoad = () => {
   loadingElem.style.display = 'block';
@@ -17,6 +19,10 @@ const pageLoad = () => {
 }
 
 pageLoad();
+
+// colorInput.addEventListener('change', e => {
+//   document.documentElement.style.setProperty(colorVariable, e.target.value)
+// })
 
 //filtering projects by clickable language
 let repos = [];
@@ -57,6 +63,7 @@ const renderContact = () => {
   loadingElem.style.display = 'none';
   document.querySelector('.hide').style.display = 'block';
   avatar.src = profileData.avatar;
+  const githubLink = profileData.html_url;
   name.innerHTML = profileData.name;
   email.innerHTML = profileData.email;
   if (!profileData.email) {
@@ -64,6 +71,10 @@ const renderContact = () => {
   } 
   renderBasicInfo();
 }
+
+avatar.addEventListener('click', () => {
+  return profileData.html_url;
+})
 
 const renderBasicInfo = () => {
   description.innerHTML = `

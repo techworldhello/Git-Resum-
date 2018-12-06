@@ -20,6 +20,11 @@ body {
   color: #63b6cf;
 }
 
+.recent-cv {
+  font-size: 16pt;
+  margin: 0;
+}
+
 .signin-btn {
   height: 3em;
   width: 13em;

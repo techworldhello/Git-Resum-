@@ -51,14 +51,14 @@ const getUserData = (user) => {
 
   return Promise.all(promises)
     .then(values => { 
-      console.log(values);
       return parseUserData(values)
       //return values
     })
     // .then(json => json.map(repo => repo.name))
     // .then(repoNames => repoNames.map(repoName => {
-    //   fetch(`https://api.github.com/repos/${user}/${repoName}/contents/README.md`)
+    //   fetch(`https://api.github.com/repos/${values[0].login}/${values[1].name}/contents/README.md`)
     // }))
+    // .then(res => console.log(res.json))
     .catch(error => { 
       console.log(error.message)
     })
@@ -97,7 +97,7 @@ app.get('/user/signin/callback', (req, res, next) => {
           // const accessToken = queryStringToObj(response.data).access_token
           fetch(`http://localhost:3000/api/${json.login}`)
             .then(data => data.json())
-            .then(json => res.render('resume', {json}))
+            .then(json => res.render('resume', { json }))
         })
     })
     .catch(error => {

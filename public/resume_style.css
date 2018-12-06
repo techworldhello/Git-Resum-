@@ -22,19 +22,17 @@
 }
 
 .user-info {
-  padding: 1em;
+  padding: 1em 0;
   display: flex;
 	justify-content: flex-start;
 	align-items: center;
-  /* display: flex;
-  justify-content: space-around; */
 }
 
 .avatar {
   width: 5rem;
 	height: 5rem;
 	border-radius: 10%;
-	margin-right: 1rem;
+	margin-right: 1.5rem;
 }
 
 .name {
@@ -50,13 +48,20 @@
   color: #63b6cf;
 }
 
+.lang-list {
+  font-size: 12pt;
+  font-weight: bold;
+}
+
 .project-description {
   visibility: hidden;  
 }
 
 .email-dropdown {
   margin-left: auto;
+  margin-right: 1.5em;
   list-style-type: none;
+  position: relative;
 }
 
 .contact-info {
@@ -74,6 +79,11 @@
   color: white;
   border: none;
   cursor: pointer;
+}
+
+.contact {
+  position: absolute;
+  margin-top: .5em;
 }
 
 .logo {
@@ -101,7 +111,7 @@
 
 .main {
   display: flex;
-  justify-content: space-evenly;
+  justify-content: space-between;
 }
 
 .tech-stack {
@@ -115,7 +125,7 @@
 .projects {
   display: grid;
   margin-top: 1.5em;
-  width: 60%;
+  width: 80%;
   grid-template-columns: repeat(3, 1fr);
   grid-gap: 1rem;
   grid-auto-rows: 1fr;
