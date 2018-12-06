@@ -63,7 +63,6 @@ const renderContact = () => {
   loadingElem.style.display = 'none';
   document.querySelector('.hide').style.display = 'block';
   avatar.src = profileData.avatar;
-  const githubLink = profileData.html_url;
   name.innerHTML = profileData.name;
   email.innerHTML = profileData.email;
   if (!profileData.email) {

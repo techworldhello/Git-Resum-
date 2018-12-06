@@ -15,6 +15,7 @@ const parseUserData = data => {
     bio: data[0].bio ? data[0].bio : '',
     location: data[0].location,
     avatar: data[0].avatar_url,
+    github: data[0].html_url,
     email: data[0].email,
     languages: data[1].map(repo => repo.language).filter((val, i, arr) => val && arr.indexOf(val) === i),
     organisations: data[1].organisations,
@@ -52,7 +53,7 @@ const getUserData = (user) => {
   return Promise.all(promises)
     .then(values => { 
       return parseUserData(values)
-      //return values
+      // return values
     })
     // .then(json => json.map(repo => repo.name))
     // .then(repoNames => repoNames.map(repoName => {
