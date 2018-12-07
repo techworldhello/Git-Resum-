@@ -6,6 +6,8 @@ Users are able to create their developer resume by simply connecting their Githu
 
 The result is a user-friendly, CV version of their Github with all the key information to pass onto their recruiter, friends or family.
 
+[Check it out here](https://git-resume.herokuapp.com/)
+
 ## Tech stack
 
 * JavaScript 
