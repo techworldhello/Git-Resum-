@@ -19,6 +19,7 @@ const parseUserData = data => {
     email: data[0].email,
     languages: data[1].map(repo => repo.language).filter((val, i, arr) => val && arr.indexOf(val) === i),
     organisations: data[1].organisations,
+    repo_count: data[1].length,
     projects: data[1].map(repo => {
       return {
         name: repo.name, 
@@ -52,8 +53,14 @@ const getUserData = (user) => {
 
   return Promise.all(promises)
     .then(values => { 
+      // if (values.repo_count > 100) {
+      //   fetch(`https://api.github.com/users/${user}/repos?${numRepos}client_id=${CLIENT_ID}&client_secret=${CLIENT_SECRET}`)
+      // }
+      // .then(res => res.json())
+      // else 
       return parseUserData(values)
-      // return values
+      //return values
+      
     })
     // .then(json => json.map(repo => repo.name))
     // .then(repoNames => repoNames.map(repoName => {
@@ -96,7 +103,7 @@ app.get('/user/signin/callback', (req, res, next) => {
         .then(userData => userData.json())
         .then(json => {
           // const accessToken = queryStringToObj(response.data).access_token
-          fetch(`https://git-resume.herokuapp.com/api/${json.login}`)
+          fetch(`http://localhost:3000//api/${json.login}`)
             .then(data => data.json())
             .then(json => res.render('resume', { json }))
         })
@@ -107,7 +114,7 @@ app.get('/user/signin/callback', (req, res, next) => {
 })
 
 app.get('/:login', (req, res) => { 
-  res.render('resume')
+  res.render('resume');
   res.send(req.params.login + req.query.user_token)
 })
 

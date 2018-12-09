@@ -1,3 +1,5 @@
+console.log('dhfjksd')
+
 const avatar = document.querySelector('.avatar');
 const name = document.querySelector('.name');
 const contactInfo = document.querySelector('.contact-info');
@@ -34,11 +36,17 @@ const filterProject = (clickedLng) => {
       .filter(project => project.language === clickedLng)
 }
 
+const formatProjectName = (projectName) => {
+  return projectName.split(/[-_]+/).map(word => {
+    return word.charAt(0).toUpperCase() + word.slice(1);
+  })
+}
+
 const renderProjects = () => {
   // increase star(font) size to the pt of num of stars
   projects.innerHTML = filterProject(clickedLng).map(project => `
     <div class="tile" onClick="window.open('', '_new').location.href='${project.link}';">
-      <h3 style="margin: 0;">${project.name}</h3>
+      <h3 style="margin: 0;">${ formatProjectName(project.name).join(' ') }</h3>
       <div>${project.star_count > 0 ? project.star_count + ' &#11088;' : ''}</div>
       <p>${project.description ? `${project.description.slice(0, 100)}…`: ''}</p>
     </div>
