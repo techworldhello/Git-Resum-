@@ -100,7 +100,7 @@ app.get('/user/signin/callback', (req, res, next) => {
         .then(userData => userData.json())
         .then(json => {
           // const accessToken = queryStringToObj(response.data).access_token
-          fetch(`https://git-resume.herokuapp.com//api/${json.login}`)
+          fetch(`https://git-resume.herokuapp.com/${json.login}`)
             .then(data => data.json())
             .then(json => res.render('resume', { json }))
         })
