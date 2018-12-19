@@ -1,5 +1,3 @@
-console.log('dhfjksd')
-
 const avatar = document.querySelector('.avatar');
 const name = document.querySelector('.name');
 const contactInfo = document.querySelector('.contact-info');
@@ -13,7 +11,7 @@ const languageList = document.querySelector('.lang-list');
 const allLngsHeading = document.querySelector('.all-lngs');
 const loadingElem = document.querySelector('.loading');
 const colorInput = document.querySelector('input[type=color]');
-const colorVariable = '--color';
+const defaultColor = '--color';
 
 const pageLoad = () => {
   loadingElem.style.display = 'block';
@@ -23,7 +21,7 @@ const pageLoad = () => {
 pageLoad();
 
 // colorInput.addEventListener('change', e => {
-//   document.documentElement.style.setProperty(colorVariable, e.target.value)
+//   document.documentElement.style.setProperty(defaultColor, e.target.value)
 // })
 
 //filtering projects by clickable language
@@ -101,5 +99,3 @@ const renderBasicInfo = () => {
   })
   renderProjects();
 } 
-
-

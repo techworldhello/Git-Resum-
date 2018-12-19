@@ -34,18 +34,26 @@ const parseUserData = data => {
   };
 }
 
-// const getReadmeData = (user, repoName) => {
-//   .then(json => json.map(repo => repo.name))
-//     .then(repoNames => repoNames.map(repoName => {
-//       fetch()
-//     }))
-//     fetch(`https://api.github.com/repos/${user}/${repoName}/contents/README.md`)
-// }
+const getReadmeData = (user, repoName) => {
+  fetch(`https://api.github.com/repos/${user}/${repoName}/contents/README.md`)
+  .then(json => json.map(repo => repo.name))
+  .then(repoNames => repoNames.map(repoName => {
+    fetch()
+  }))
+}
 
+const getMoreReposIfOver100 = (values) => {
+  if (values.repo_count > 100) {
+    fetch(`https://api.github.com/users/${user}/repos?${numRepos}client_id=${CLIENT_ID}&client_secret=${CLIENT_SECRET}`)
+    .then(res => res.json())
+    .then(values => parseUserData(values))
+  } else {
+    return parseUserData(values);
+  }
+}
+ 
 const getUserData = (user) => {
   const numRepos = 'page=1&per_page=100&';
-  // make first call to see number of repos, if it exceeds 100
-  // make another call with offset of 100
   const promises = [
     fetch(`https://api.github.com/users/${user}?client_id=${CLIENT_ID}&client_secret=${CLIENT_SECRET}`), fetch(`https://api.github.com/users/${user}/repos?${numRepos}client_id=${CLIENT_ID}&client_secret=${CLIENT_SECRET}`)]
     .map(p => p
@@ -53,20 +61,9 @@ const getUserData = (user) => {
 
   return Promise.all(promises)
     .then(values => { 
-      // if (values.repo_count > 100) {
-      //   fetch(`https://api.github.com/users/${user}/repos?${numRepos}client_id=${CLIENT_ID}&client_secret=${CLIENT_SECRET}`)
-      // }
-      // .then(res => res.json())
-      // else 
-      return parseUserData(values)
-      //return values
-      
+      console.log(values)
+      getMoreReposIfOver100(values);
     })
-    // .then(json => json.map(repo => repo.name))
-    // .then(repoNames => repoNames.map(repoName => {
-    //   fetch(`https://api.github.com/repos/${values[0].login}/${values[1].name}/contents/README.md`)
-    // }))
-    // .then(res => console.log(res.json))
     .catch(error => { 
       console.log(error.message)
     })
@@ -103,7 +100,7 @@ app.get('/user/signin/callback', (req, res, next) => {
         .then(userData => userData.json())
         .then(json => {
           // const accessToken = queryStringToObj(response.data).access_token
-          fetch(`https://git-resume.herokuapp.com/api/${json.login}`)
+          fetch(`http://localhost:3000/api/${json.login}`)
             .then(data => data.json())
             .then(json => res.render('resume', { json }))
         })
@@ -118,10 +115,9 @@ app.get('/:login', (req, res) => {
   res.send(req.params.login + req.query.user_token)
 })
 
-
 app.get('/api/:user', (req, res) => {
   const queryParam = req.params.user;
   getUserData(queryParam).then(info => res.json(info))
 })
 
-app.listen(PORT, () => console.log(`listening on port ${PORT}`))
+app.listen(PORT, () => console.log(`listening on port ${PORT}`));

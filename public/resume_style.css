@@ -105,6 +105,10 @@
   cursor: pointer;
 }
 
+.tile:hover {
+
+}
+
 .description {
   text-align: center;
 }
