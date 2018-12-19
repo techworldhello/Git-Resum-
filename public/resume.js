@@ -30,8 +30,7 @@ let clickedLng = '';
 
 const filterProject = (clickedLng) => {
   return clickedLng === '' ? repos :
-    repos
-      .filter(project => project.language === clickedLng)
+    repos.filter(project => project.language === clickedLng)
 }
 
 const formatProjectName = (projectName) => {
